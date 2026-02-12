@@ -1,9 +1,10 @@
 import base64
 import codecs
 
-from flask import Flask, jsonify, request
+from flask import Blueprint, Flask, jsonify, request
 
 app = Flask(__name__)
+bp = Blueprint("api", __name__, url_prefix="/_/backend")
 
 # ---------------------------------------------------------------------------
 # ROT8000 lookup table
@@ -45,14 +46,14 @@ def rot8000(text: str) -> str:
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
-@app.post("/api/rot13")
+@bp.post("/api/rot13")
 def api_rot13():
     data = request.get_json(force=True)
     text = data.get("text", "")
     return jsonify(result=codecs.encode(text, "rot_13"))
 
 
-@app.post("/api/base64encode")
+@bp.post("/api/base64encode")
 def api_base64encode():
     data = request.get_json(force=True)
     text = data.get("text", "")
@@ -60,7 +61,7 @@ def api_base64encode():
     return jsonify(result=encoded)
 
 
-@app.post("/api/base64decode")
+@bp.post("/api/base64decode")
 def api_base64decode():
     data = request.get_json(force=True)
     text = data.get("text", "")
@@ -71,12 +72,14 @@ def api_base64decode():
     return jsonify(result=decoded)
 
 
-@app.post("/api/rot8000")
+@bp.post("/api/rot8000")
 def api_rot8000():
     data = request.get_json(force=True)
     text = data.get("text", "")
     return jsonify(result=rot8000(text))
 
+
+app.register_blueprint(bp)
 
 if __name__ == "__main__":
     app.run(debug=True)

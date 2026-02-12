@@ -3,3 +3,5 @@ frontend/dist/
 __pycache__/
 *.pyc
 .venv/
+.vercel
+.env*.local

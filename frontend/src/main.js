@@ -6,7 +6,7 @@ document.querySelectorAll("[data-op]").forEach((btn) => {
     const op = btn.dataset.op;
     output.value = "";
     try {
-      const res = await fetch(`/api/${op}`, {
+      const res = await fetch(`/_/backend/api/${op}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: input.value }),
