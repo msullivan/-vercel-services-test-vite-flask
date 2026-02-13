@@ -29,6 +29,10 @@
   }
 </script>
 
+<svelte:head>
+  <title>Cipher Tool</title>
+</svelte:head>
+
 <main>
   <h1>Cipher Tool</h1>
   <textarea bind:value={input} placeholder="Enter text…" rows="6"></textarea>
