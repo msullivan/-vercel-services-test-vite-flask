@@ -4,20 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Cipher Tool</title>
-    <link rel="stylesheet" href="/src/style.css" />
   </head>
   <body>
-    <main>
-      <h1>Cipher Tool</h1>
-      <textarea id="input" placeholder="Enter text…" rows="6"></textarea>
-      <div class="buttons">
-        <button data-op="rot13">ROT13</button>
-        <button data-op="base64encode">Base64 Encode</button>
-        <button data-op="base64decode">Base64 Decode</button>
-        <button data-op="rot8000">ROT8000</button>
-      </div>
-      <textarea id="output" placeholder="Result" rows="6" readonly></textarea>
-    </main>
+    <div id="app"></div>
     <script type="module" src="/src/main.js"></script>
   </body>
 </html>

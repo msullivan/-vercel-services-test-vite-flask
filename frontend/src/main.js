@@ -1,24 +1,5 @@
-const input = document.getElementById("input");
-const output = document.getElementById("output");
+import "./style.css";
+import { mount } from "svelte";
+import App from "./App.svelte";
 
-document.querySelectorAll("[data-op]").forEach((btn) => {
-  btn.addEventListener("click", async () => {
-    const op = btn.dataset.op;
-    output.value = "";
-    try {
-      const res = await fetch(`/_/backend/api/${op}`, {
-        method: "POST",
-        headers: { "Content-Type": "application/json" },
-        body: JSON.stringify({ text: input.value }),
-      });
-      const data = await res.json();
-      if (!res.ok) {
-        output.value = `Error: ${data.error || res.statusText}`;
-        return;
-      }
-      output.value = data.result;
-    } catch (err) {
-      output.value = `Error: ${err.message}`;
-    }
-  });
-});
+mount(App, { target: document.getElementById("app") });
