@@ -37,10 +37,10 @@
     {/each}
   </div>
   <textarea value={output} placeholder="Result" rows="6" readonly></textarea>
-  <a href="/_/backend/api/status" class="status-link">
-    <object data="/_/backend/api/status.svg" type="image/svg+xml" class="status-obj">
-      <div class="status status-error">Backend: unreachable</div>
-    </object>
+  <a href="/_/backend/api/status">
+    <img src="/_/backend/api/status.svg" alt="Backend: unreachable" class="status-img"
+      onerror={(e) => { e.target.style.display='none'; e.target.nextElementSibling.style.display='block'; }} />
+    <div class="status status-error" style="display:none">Backend: unreachable</div>
   </a>
 </main>
 
@@ -103,16 +103,10 @@
     background: #4338ca;
   }
 
-  .status-link {
-    display: block;
-    text-decoration: none;
-  }
-
-  .status-obj {
+  .status-img {
     width: 100%;
     height: 32px;
     display: block;
-    pointer-events: none;
   }
 
   .status {
