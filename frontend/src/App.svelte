@@ -8,6 +8,22 @@
 
   let input = $state("bss-ol-bar");
   let output = $state("");
+  let status = $state(null);
+
+  async function fetchStatus() {
+    try {
+      const res = await fetch("/_/backend/api/status");
+      if (!res.ok) {
+        status = { status: "error", error: `${res.status} ${res.statusText}` };
+        return;
+      }
+      status = await res.json();
+    } catch (err) {
+      status = { status: "error", error: err.message };
+    }
+  }
+
+  fetchStatus();
 
   async function runOp(op) {
     output = "";
@@ -38,6 +54,15 @@
     {/each}
   </div>
   <textarea value={output} placeholder="Result" rows="6" readonly></textarea>
+  <div class="status" class:status-error={status && status.status !== "ok"}>
+    {#if status === null}
+      Checking backend…
+    {:else if status.status === "ok"}
+      Backend: OK — Operations: {status.operations.join(", ")}
+    {:else}
+      Backend: error — {status.error}
+    {/if}
+  </div>
 </main>
 
 <style>
@@ -97,5 +122,21 @@
 
   button:active {
     background: #4338ca;
+  }
+
+  .status {
+    text-align: center;
+    font-size: 0.8rem;
+    color: #94a3b8;
+    padding: 0.5rem;
+    border: 1px solid #334155;
+    border-radius: 0.5rem;
+    background: #1e293b;
+  }
+
+  .status-error {
+    color: #f87171;
+    border-color: #7f1d1d;
+    background: #450a0a;
   }
 </style>
