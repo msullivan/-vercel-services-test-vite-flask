@@ -47,7 +47,7 @@ def rot8000(text: str) -> str:
 # ---------------------------------------------------------------------------
 @app.get("/api/status")
 def api_status():
-    return jsonify(status="ok", operations=["rot13", "base64encode", "base64decode", "rot8000"])
+    return jsonify(status="%% OK %%")
 
 
 @app.get("/api/status.svg")

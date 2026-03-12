@@ -37,9 +37,11 @@
     {/each}
   </div>
   <textarea value={output} placeholder="Result" rows="6" readonly></textarea>
-  <object data="/_/backend/api/status.svg" type="image/svg+xml" class="status-obj">
-    <div class="status status-error">Backend: unreachable</div>
-  </object>
+  <a href="/_/backend/api/status" class="status-link">
+    <object data="/_/backend/api/status.svg" type="image/svg+xml" class="status-obj">
+      <div class="status status-error">Backend: unreachable</div>
+    </object>
+  </a>
 </main>
 
 <style>
@@ -101,10 +103,16 @@
     background: #4338ca;
   }
 
+  .status-link {
+    display: block;
+    text-decoration: none;
+  }
+
   .status-obj {
     width: 100%;
     height: 32px;
     display: block;
+    pointer-events: none;
   }
 
   .status {
