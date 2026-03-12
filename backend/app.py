@@ -1,7 +1,7 @@
 import base64
 import codecs
 
-from flask import Blueprint, Flask, jsonify, request
+from flask import Blueprint, Flask, Response, jsonify, request
 
 app = Flask(__name__)
 bp = Blueprint("api", __name__, url_prefix="/_/backend")
@@ -49,6 +49,18 @@ def rot8000(text: str) -> str:
 @bp.get("/api/status")
 def api_status():
     return jsonify(status="ok", operations=["rot13", "base64encode", "base64decode", "rot8000"])
+
+
+@bp.get("/api/status.svg")
+def api_status_svg():
+    svg = """<svg xmlns="http://www.w3.org/2000/svg" width="560" height="32">
+  <rect width="100%" height="100%" rx="8" fill="#1e293b" stroke="#334155"/>
+  <text x="50%" y="50%" dominant-baseline="central" text-anchor="middle"
+        font-family="ui-monospace, monospace" font-size="11" fill="#94a3b8">
+    Backend: OK
+  </text>
+</svg>"""
+    return Response(svg, mimetype="image/svg+xml")
 
 
 @bp.post("/api/rot13")

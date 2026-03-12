@@ -8,23 +8,6 @@
 
   let input = $state("bss-ol-bar");
   let output = $state("");
-  let status = $state(null);
-
-  async function fetchStatus() {
-    try {
-      const res = await fetch("/_/backend/api/status");
-      if (!res.ok) {
-        status = { status: "error", error: `${res.status} ${res.statusText}` };
-        return;
-      }
-      status = await res.json();
-    } catch (err) {
-      status = { status: "error", error: err.message };
-    }
-  }
-
-  fetchStatus();
-
   async function runOp(op) {
     output = "";
     try {
@@ -54,15 +37,9 @@
     {/each}
   </div>
   <textarea value={output} placeholder="Result" rows="6" readonly></textarea>
-  <div class="status" class:status-error={status && status.status !== "ok"}>
-    {#if status === null}
-      Checking backend…
-    {:else if status.status === "ok"}
-      Backend: OK — Operations: {status.operations.join(", ")}
-    {:else}
-      Backend: error — {status.error}
-    {/if}
-  </div>
+  <object data="/_/backend/api/status.svg" type="image/svg+xml" class="status-obj">
+    <div class="status status-error">Backend: unreachable</div>
+  </object>
 </main>
 
 <style>
@@ -122,6 +99,12 @@
 
   button:active {
     background: #4338ca;
+  }
+
+  .status-obj {
+    width: 100%;
+    height: 32px;
+    display: block;
   }
 
   .status {
