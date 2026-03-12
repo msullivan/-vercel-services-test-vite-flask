@@ -46,6 +46,11 @@ def rot8000(text: str) -> str:
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
+@bp.get("/api/status")
+def api_status():
+    return jsonify(status="ok", operations=["rot13", "base64encode", "base64decode", "rot8000"])
+
+
 @bp.post("/api/rot13")
 def api_rot13():
     data = request.get_json(force=True)

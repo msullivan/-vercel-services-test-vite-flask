@@ -6,7 +6,7 @@
     { id: "rot8000", label: "ROT8000" },
   ];
 
-  let input = $state("");
+  let input = $state("bss-ol-bar");
   let output = $state("");
 
   async function runOp(op) {
