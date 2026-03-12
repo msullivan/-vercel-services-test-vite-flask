@@ -16,11 +16,11 @@
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: input }),
       });
-      const data = await res.json();
       if (!res.ok) {
-        output = `Error: ${data.error || res.statusText}`;
+        output = `Error: ${res.status} ${res.statusText}`;
         return;
       }
+      const data = await res.json();
       output = data.result;
     } catch (err) {
       output = `Error: ${err.message}`;
