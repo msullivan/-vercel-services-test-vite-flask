@@ -3,7 +3,7 @@ import codecs
 
 from flask import Blueprint, Flask, Response, jsonify, request
 
-api = Flask(__name__)
+app = Flask(__name__)
 
 # ---------------------------------------------------------------------------
 # ROT8000 lookup table
@@ -35,12 +35,12 @@ def rot8000(text: str) -> str:
 # ---------------------------------------------------------------------------
 # Routes
 # ---------------------------------------------------------------------------
-@api.get("/api/status")
+@app.get("/api/status")
 def api_status():
     return jsonify(status="%% OK %%")
 
 
-@api.get("/api/status.svg")
+@app.get("/api/status.svg")
 def api_status_svg():
     svg = """<svg xmlns="http://www.w3.org/2000/svg" width="560" height="32">
   <rect width="100%" height="100%" rx="8" fill="#1e293b" stroke="#334155"/>
@@ -52,14 +52,14 @@ def api_status_svg():
     return Response(svg, mimetype="image/svg+xml")
 
 
-@api.post("/api/rot13")
+@app.post("/api/rot13")
 def api_rot13():
     data = request.get_json(force=True)
     text = data.get("text", "")
     return jsonify(result=codecs.encode(text, "rot_13"))
 
 
-@api.post("/api/base64encode")
+@app.post("/api/base64encode")
 def api_base64encode():
     data = request.get_json(force=True)
     text = data.get("text", "")
@@ -67,7 +67,7 @@ def api_base64encode():
     return jsonify(result=encoded)
 
 
-@api.post("/api/base64decode")
+@app.post("/api/base64decode")
 def api_base64decode():
     data = request.get_json(force=True)
     text = data.get("text", "")
@@ -78,7 +78,7 @@ def api_base64decode():
     return jsonify(result=decoded)
 
 
-@api.post("/api/rot8000")
+@app.post("/api/rot8000")
 def api_rot8000():
     data = request.get_json(force=True)
     text = data.get("text", "")
@@ -86,4 +86,4 @@ def api_rot8000():
 
 
 if __name__ == "__main__":
-    api.run(debug=True)
+    app.run(debug=True)
