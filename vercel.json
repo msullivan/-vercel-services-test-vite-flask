@@ -5,7 +5,7 @@
       "routePrefix": "/"
     },
     "api": {
-      "entrypoint": "backend/app.py",
+      "entrypoint": "backend/",
       "routePrefix": "/_/backend"
     }
   }
