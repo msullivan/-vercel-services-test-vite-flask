@@ -9,7 +9,7 @@ app = Flask(__name__)
 # ROT8000 lookup table
 # ---------------------------------------------------------------------------
 # Valid Unicode BMP ranges (excludes whitespace, control chars, surrogates)
-from .ranges import _VALID_RANGES
+from ranges import _VALID_RANGES
 
 _rot8000_map: dict[int, str] = {}
 
