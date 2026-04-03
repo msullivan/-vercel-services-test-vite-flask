@@ -5,7 +5,7 @@ export default defineConfig({
   plugins: [svelte()],
   server: {
     proxy: {
-      "/_/backend": "http://127.0.0.1:5000",
+      "/cipher": "http://127.0.0.1:5000",
     },
   },
 });

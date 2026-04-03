@@ -11,7 +11,7 @@
   async function runOp(op) {
     output = "";
     try {
-      const res = await fetch(`/_/backend/api/${op}`, {
+      const res = await fetch(`/cipher/api/${op}`, {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({ text: input }),
@@ -37,8 +37,8 @@
     {/each}
   </div>
   <textarea value={output} placeholder="Result" rows="6" readonly></textarea>
-  <a href="/_/backend/api/status">
-    <img src="/_/backend/api/status.svg" alt="Backend: unreachable" class="status-img"
+  <a href="/cipher/api/status">
+    <img src="/cipher/api/status.svg" alt="Backend: unreachable" class="status-img"
       onerror={(e) => { e.target.style.display='none'; e.target.nextElementSibling.style.display='block'; }} />
     <div class="status status-error" style="display:none">Backend: unreachable</div>
   </a>
