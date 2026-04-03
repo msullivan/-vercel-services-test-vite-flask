@@ -1,0 +1,7 @@
+[experimentalServices.web]
+entrypoint = "frontend"
+routePrefix = "/"
+
+[experimentalServices.api]
+entrypoint = "backend/app.py"
+routePrefix = "/cipher"
